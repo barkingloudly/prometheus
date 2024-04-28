@@ -10,7 +10,7 @@ networks:
 services:
 
   prometheus:
-    image: prom/prometheus:v2.36.2
+    image: prom/prometheus:v2.51.2
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -56,7 +56,7 @@ services:
           condition: on-failure
 
   alertmanager:
-    image: prom/alertmanager
+    image: prom/alertmanager:latest
     ports:
       - 9093:9093
     volumes:
@@ -74,7 +74,7 @@ services:
         condition: on-failure    
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -90,7 +90,7 @@ services:
           condition: on-failure
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:latest-ubuntu
     depends_on:
       - prometheus
     ports:
